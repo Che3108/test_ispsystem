@@ -1,0 +1,10 @@
+************* Module json_pars
+json_pars.py:9:72: C0303: Trailing whitespace (trailing-whitespace)
+json_pars.py:15:0: C0301: Line too long (114/100) (line-too-long)
+json_pars.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+json_pars.py:4:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+json_pars.py:20:4: C0103: Constant name "json_s" doesn't conform to UPPER_CASE naming style (invalid-name)
+
+------------------------------------------------------------------
+Your code has been rated at 5.00/10 (previous run: 5.00/10, +0.00)
+

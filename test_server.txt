@@ -1,0 +1,74 @@
+Тестирование основных функций:
+
+	Запрос на скачивание архива по URL:
+		URL назначения запроса: http://127.0.0.1:8008/arhive
+		Заголовок запроса:      {'Content-Length': '100', 'Content-Type': 'application/json'}
+		Тело запроса:           {"url": "http://download.ispsystem.com/OSTemplate/new/latest/Debian-7-i386-5.57-20170910000.tar.gz"}
+	Ответ сервера:
+		Код ответа:       200
+		Заголовок ответа: {'Server': 'BaseHTTP/0.6 Python/3.10.1', 'Date': 'Sun, 30 Jan 2022 18:16:46 GMT', 'Content-Type': 'application/json', 'Content-Length': '20'}
+		Тело ответа:      {"id": "1643566606"}
+
+	Запрос состояния после ожидания в 5 секунд:
+		URL назначения запроса: http://127.0.0.1:8008/arhive
+		Заголовок запроса:      {'Content-Length': '10'}
+		Тело запроса:           1643566606
+	Ответ сервера:
+		Код ответа:       200
+		Заголовок ответа: {'Server': 'BaseHTTP/0.6 Python/3.10.1', 'Date': 'Sun, 30 Jan 2022 18:16:51 GMT', 'Content-Type': 'application/json', 'Content-Length': '61'}
+		Тело ответа:      {"id": "1643566606", "status": "downloading", "progress": 63}
+
+	Запрос состояния после ожидания в 10 секунд:
+		URL назначения запроса: http://127.0.0.1:8008/arhive
+		Заголовок запроса:      {'Content-Length': '10'}
+		Тело запроса:           1643566606
+	Ответ сервера:
+		Код ответа:       200
+		Заголовок ответа: {'Server': 'BaseHTTP/0.6 Python/3.10.1', 'Date': 'Sun, 30 Jan 2022 18:17:01 GMT', 'Content-Type': 'application/json', 'Content-Length': '168'}
+		Тело ответа:      {"id": "1643566606", "status": "ok", "files": ["metainfo.xml", "initrd.gz", "install.cfg", "linux", "pxelinux.0/pxelinux.0", "pxelinux.0/ldlinux.c32", "pxelinux.conf"]}
+
+	Запрос на удаление:
+		URL назначения запроса: http://127.0.0.1:8008/arhive
+		Заголовок запроса:      {'Content-Length': '10'}
+		Тело запроса:           1643566606
+	Ответ сервера:
+		Код ответа:       200
+		Заголовок ответа: {'Server': 'BaseHTTP/0.6 Python/3.10.1', 'Date': 'Sun, 30 Jan 2022 18:17:03 GMT', 'Content-Type': 'application/json', 'Content-Length': '42'}
+		Тело ответа:      {"id": "1643566606", "status": "deleting"}
+
+	Запрос состояния того же id:
+		URL назначения запроса: http://127.0.0.1:8008/arhive
+		Заголовок запроса:      {'Content-Length': '10'}
+		Тело запроса:           1643566606
+	Ответ сервера:
+		Код ответа:       400
+		Заголовок ответа: {'Server': 'BaseHTTP/0.6 Python/3.10.1', 'Date': 'Sun, 30 Jan 2022 18:17:05 GMT', 'Content-Type': 'application/json', 'Content-Length': '21'}
+		Тело ответа:      {"detal": "wrong_id"}
+
+	Запрос на скачивание с ошибочным json-объектом:
+		URL назначения запроса: http://127.0.0.1:8008/arhive
+		Заголовок запроса:      {'Content-Length': '14', 'Content-Type': 'application/json'}
+		Тело запроса:           {"foo": "bar"}
+	Ответ сервера:
+		Код ответа:       400
+		Заголовок ответа: {'Server': 'BaseHTTP/0.6 Python/3.10.1', 'Date': 'Sun, 30 Jan 2022 18:17:07 GMT', 'Content-Type': 'application/json', 'Content-Length': '26'}
+		Тело ответа:      {"detal": "wrong_request"}
+
+	Запрос на скачивание не потому пути:
+		URL назначения запроса: http://127.0.0.1:8008/
+		Заголовок запроса:      {'Content-Length': '100', 'Content-Type': 'application/json'}
+		Тело запроса:           {"url": "http://download.ispsystem.com/OSTemplate/new/latest/Debian-7-i386-5.57-20170910000.tar.gz"}
+	Ответ сервера:
+		Код ответа:       400
+		Заголовок ответа: {'Server': 'BaseHTTP/0.6 Python/3.10.1', 'Date': 'Sun, 30 Jan 2022 18:17:09 GMT', 'Content-Type': 'application/json', 'Content-Length': '23'}
+		Тело ответа:      {"detal": "wrong_path"}
+
+	Запрос состояния архива с ошибочным id:
+		URL назначения запроса: http://127.0.0.1:8008/arhive
+		Заголовок запроса:      {'Content-Length': '6'}
+		Тело запроса:           123456
+	Ответ сервера:
+		Код ответа:       400
+		Заголовок ответа: {'Server': 'BaseHTTP/0.6 Python/3.10.1', 'Date': 'Sun, 30 Jan 2022 18:17:11 GMT', 'Content-Type': 'application/json', 'Content-Length': '21'}
+		Тело ответа:      {"detal": "wrong_id"}
+

@@ -1,0 +1,10 @@
+************* Module main
+main.py:10:0: C0303: Trailing whitespace (trailing-whitespace)
+main.py:13:0: C0303: Trailing whitespace (trailing-whitespace)
+main.py:16:0: C0303: Trailing whitespace (trailing-whitespace)
+main.py:19:0: C0303: Trailing whitespace (trailing-whitespace)
+main.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+
+------------------------------------------------------------------
+Your code has been rated at 5.00/10 (previous run: 5.00/10, +0.00)
+

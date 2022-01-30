@@ -1,0 +1,20 @@
+************* Module download
+download.py:37:0: C0301: Line too long (101/100) (line-too-long)
+download.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+download.py:17:8: C0103: Attribute name "id" doesn't conform to snake_case naming style (invalid-name)
+download.py:10:0: R0902: Too many instance attributes (8/7) (too-many-instance-attributes)
+download.py:10:0: R0205: Class 'DownloadMaster' inherits from object, can be safely removed from bases in python3 (useless-object-inheritance)
+download.py:21:23: W0621: Redefining name 'url' from outer scope (line 86) (redefined-outer-name)
+download.py:44:15: W0703: Catching too general exception Exception (broad-except)
+download.py:35:20: C0103: Variable name "Content_Length" doesn't conform to snake_case naming style (invalid-name)
+download.py:36:55: C0103: Variable name "f" doesn't conform to snake_case naming style (invalid-name)
+download.py:27:8: W0201: Attribute 'url' defined outside __init__ (attribute-defined-outside-init)
+download.py:28:8: W0201: Attribute 'file_name' defined outside __init__ (attribute-defined-outside-init)
+download.py:29:8: W0201: Attribute 'download_pe_cent' defined outside __init__ (attribute-defined-outside-init)
+download.py:41:32: W0201: Attribute 'download_pe_cent' defined outside __init__ (attribute-defined-outside-init)
+download.py:56:12: W0201: Attribute 'files' defined outside __init__ (attribute-defined-outside-init)
+download.py:86:4: C0103: Constant name "url" doesn't conform to UPPER_CASE naming style (invalid-name)
+
+------------------------------------------------------------------
+Your code has been rated at 7.46/10 (previous run: 7.46/10, +0.00)
+
