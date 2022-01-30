@@ -33,3 +33,5 @@ json_pars.py содержит функцию json_pars(testing_json). Основ
 
 ## Как начать?
 Скачиваем исполняемые файлы <b>download.py</b>, <b>my_server.py</b>, <b>main.py</b>, <b>json_pars.py</b>. Запускаем скрипт <b>main.py</b>, при необходимости изменив значение переменной PORT.
+
+## Тестирование
