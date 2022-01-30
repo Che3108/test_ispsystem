@@ -3,6 +3,7 @@
 import tarfile
 import json
 import os
+import shutil
 import requests
 from requests.exceptions import HTTPError
 
@@ -11,18 +12,18 @@ class DownloadMaster(object):
     DownloadMaster - класс для управления контентом (загрузка, распаковка, удаление, состояние)
         При инициализации объекта необходимо подать уникальный его уникитальный номер в виде строки
     '''
-    def __init__(self, id_arh: str):
-        self.chunk_size = 1024
+    def __init__(self, id_arh: str, chunk_size = 1024) -> None:
+        self.chunk_size = chunk_size
         self.id = id_arh
         self.status_list = ['downloading', 'unpacking', 'ok', 'deleting', 'unknown']
         self.status = self.status_list[-1]
 
     def download(self, url: str):
-        '''
+        """
         download - функция загрузки архива
             На вход получает url-адрес и загружает архив
             При неудаче в знании статуса возращает строку с ошибкой
-        '''
+        """
         self.url = url
         self.file_name = self.id+'.tar.gz'
         self.download_pe_cent = 0
@@ -46,7 +47,7 @@ class DownloadMaster(object):
             self.extract()
             self.status = self.status_list[2]
 
-    def extract(self):
+    def extract(self) -> None:
         '''
         extract - функция извлечения данных из архива
         '''
@@ -54,6 +55,15 @@ class DownloadMaster(object):
             self.status = self.status_list[1]
             self.files = tar.getnames()
             tar.extractall(path=self.id)
+
+    def delete_arh(self) -> None:
+        '''
+        delete_arh - функция удаления архива и распакованных файлов
+        '''
+        self.status = self.status_list[3]
+        os.remove(os.path.join(os.getcwd(), self.file_name))
+        arh_unpack_dir = os.path.join(os.getcwd(), self.id)
+        shutil.rmtree(arh_unpack_dir)
 
     def get_status(self) -> str:
         '''
@@ -69,16 +79,6 @@ class DownloadMaster(object):
         else:
             status['status'] = self.status
         return json.dumps(status)
-    
-    def delete_arh(self):
-        '''
-        delete_arh - функция удаления архива и распакованных файлов
-        '''
-        self.status = self.status_list[3]
-        os.remove(os.path.join(os.getcwd(), self.file_name))
-        arh_unpack_dir = os.path.join(os.getcwd(), self.id)
-        os.system('rm -r "'+arh_unpack_dir+'"')
-
 
 
 if __name__ == '__main__':

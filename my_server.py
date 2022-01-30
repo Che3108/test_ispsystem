@@ -10,15 +10,15 @@ class MyHTTPHandler(BaseHTTPRequestHandler):
     '''
     MyHTTPHandler - класс для обработки запросов на http-сервер
     '''
-    def __init__(self):
+    def __init__(self) -> None:
         # arh_id_base - словарь для хранения id в качестве ключа и экзепляра класса DownloadMaster
         self.arh_id_base = dict()
         
-    def __call__(self, *args, **kwargs):
+    def __call__(self, *args, **kwargs) -> None:
         # При вызове объекта, запустится инициализация родителя
         super().__init__(*args, **kwargs)
 
-    def do_POST(self):
+    def do_POST(self) -> None:
         # ручка для запуска скачивания архива
         if self.path == '/arhive':
             
@@ -35,7 +35,7 @@ class MyHTTPHandler(BaseHTTPRequestHandler):
                 arh_id = str(int(time.time()))
                 
                 # записываем в словарь id и обработчик контента
-                self.arh_id_base[arh_id] = DownloadMaster(arh_id)
+                self.arh_id_base[arh_id] = DownloadMaster(arh_id, 1024)
                 
                 # запускаем загрузку и распаковку архива в отдельном потоке
                 th = threading.Thread(
@@ -49,18 +49,22 @@ class MyHTTPHandler(BaseHTTPRequestHandler):
                 answer_mess = '{"id": "'+arh_id+'"}'
             else:
                 # иначе посылаем код ошибки и детальную информацию
-                answer_code = 406
+                answer_code = 400
                 answer_mess = '{"detal": "wrong_request"}'
+        else:
+            # иначе посылаем код ошибки и детальную информацию
+            answer_code = 400
+            answer_mess = '{"detal": "wrong_path"}'
                 
-            # упаковываем все в ответ и отправляем
-            answer_mess = answer_mess.encode('utf-8')
-            self.send_response(answer_code)
-            self.send_header('Content-Type', 'application/json')
-            self.send_header('Content-Length', str(len(answer_mess)))
-            self.end_headers()
-            self.wfile.write(answer_mess)
+        # упаковываем все в ответ и отправляем
+        answer_mess = answer_mess.encode('utf-8')
+        self.send_response(answer_code)
+        self.send_header('Content-Type', 'application/json')
+        self.send_header('Content-Length', str(len(answer_mess)))
+        self.end_headers()
+        self.wfile.write(answer_mess)
 
-    def do_GET(self):
+    def do_GET(self) -> None:
         # ручка для получения текущего состояния архива
         if self.path == '/arhive':
             # Достаем информацию из запроса
@@ -74,18 +78,22 @@ class MyHTTPHandler(BaseHTTPRequestHandler):
                 answer_mess = self.arh_id_base[get].get_status()
             else:
                 # иначе посылаем код ошибки и детальную информацию
-                answer_code = 406
+                answer_code = 400
                 answer_mess = '{"detal": "wrong_id"}'
+        else:
+            # иначе посылаем код ошибки и детальную информацию
+            answer_code = 400
+            answer_mess = '{"detal": "wrong_path"}'
                 
-             # упаковываем все в ответ и отправляем
-            answer_mess = answer_mess.encode('utf-8')
-            self.send_response(answer_code)
-            self.send_header('Content-Type', 'application/json')
-            self.send_header('Content-Length', str(len(answer_mess)))
-            self.end_headers()
-            self.wfile.write(answer_mess)
+        # упаковываем все в ответ и отправляем
+        answer_mess = answer_mess.encode('utf-8')
+        self.send_response(answer_code)
+        self.send_header('Content-Type', 'application/json')
+        self.send_header('Content-Length', str(len(answer_mess)))
+        self.end_headers()
+        self.wfile.write(answer_mess)
     
-    def do_DELETE(self):
+    def do_DELETE(self) -> None:
         # ручка для удаления скачанного архива по уникальному идентификатору
         if self.path == '/arhive':
             # Достаем информацию из запроса
@@ -110,13 +118,17 @@ class MyHTTPHandler(BaseHTTPRequestHandler):
                 answer_mess = '{"id": "'+del_id+'", "status": "deleting"}'
             else:
                 # иначе посылаем код ошибки и детальную информацию
-                answer_code = 406
+                answer_code = 400
                 answer_mess = '{"detal": "wrong_id"}'
+        else:
+            # иначе посылаем код ошибки и детальную информацию
+            answer_code = 400
+            answer_mess = '{"detal": "wrong_path"}'
                 
-             # упаковываем все в ответ и отправляем
-            answer_mess = answer_mess.encode('utf-8')
-            self.send_response(answer_code)
-            self.send_header('Content-Type', 'application/json')
-            self.send_header('Content-Length', str(len(answer_mess)))
-            self.end_headers()
-            self.wfile.write(answer_mess)
+        # упаковываем все в ответ и отправляем
+        answer_mess = answer_mess.encode('utf-8')
+        self.send_response(answer_code)
+        self.send_header('Content-Type', 'application/json')
+        self.send_header('Content-Length', str(len(answer_mess)))
+        self.end_headers()
+        self.wfile.write(answer_mess)

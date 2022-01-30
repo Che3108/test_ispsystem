@@ -3,7 +3,7 @@
 import socketserver
 from my_server import MyHTTPHandler
 
-def start_server(port: int):
+def start_server(port: int) -> None:
     '''
     start_server - функция для запуска сервера
     '''
