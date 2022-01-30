@@ -18,7 +18,7 @@ class DownloadMaster(object):
         self.status_list = ['downloading', 'unpacking', 'ok', 'deleting', 'unknown']
         self.status = self.status_list[-1]
 
-    def download(self, url: str):
+    def download(self, url: str) -> None:
         """
         download - функция загрузки архива
             На вход получает url-адрес и загружает архив
