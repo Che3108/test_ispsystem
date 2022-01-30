@@ -35,9 +35,9 @@ json_pars.py содержит функцию json_pars(testing_json). Основ
 Скачиваем исполняемые файлы <b>download.py</b>, <b>my_server.py</b>, <b>main.py</b>, <b>json_pars.py</b>. Запускаем скрипт <b>main.py</b>, при необходимости изменив значение переменной PORT.
 
 ## Тестирование
-Результаты тестирования основных функция находятся в папке <b>tests</b> в файле </b>test_server.txt</b>.<br>
+Результаты тестирования основных функция находятся в папке <b>tests</b> в файле <b>test_server.txt</b>.<br>
 Результаты тестирования с помощью утилиты <b>pylint</b> файла <b>main.py</b> находятся в папке <b>tests</b> в файле <b>linter_main_py.txt</b>.<br>
 Результаты тестирования с помощью утилиты <b>pylint</b> файла <b>download.py</b> находятся в папке <b>tests</b> в файле <b>linter_download_py.txt</b>.<br>
 Результаты тестирования с помощью утилиты <b>pylint</b> файла <b>my_server.py</b> находятся в папке <b>tests</b> в файле <b>linter_my_server_py.txt</b>.<br>
-Результаты тестирования с помощью утилиты <b>pylint</b> файла <b>json_pars.py</b> находятся в папке <b>tests</b> в файле <b>linter_json_pars_py.txt</b>.<br>
+Результаты тестирования с помощью утилиты <b>pylint</b> файла <b>json_pars.py</b> находятся в папке <b>tests</b> в файле <b>linter_json_pars_py.txt</b>.<br><br>
 прим. Утилита pylint показывает отсутствие строки документации к функциям, что странно, так как функции документированы.
